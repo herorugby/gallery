@@ -25,6 +25,9 @@
 
         <main>
             <div>
+                <!-- imgのパスを動的にする -->
+                <img src="images/images.JPG" alt="小野寛智の写真" width="200" height="200">
+                <img src="images/images.JPG" alt="小野寛智の写真" width="200" height="200">
                 <img src="images/images.JPG" alt="小野寛智の写真" width="200" height="200">
             </div>
 
@@ -55,10 +58,10 @@
 
             <div>
                 <ul>
-                    <li><a href="index.php?page=">前のページ</a></li>
-                    <li>前のページ</li>
-                    <li><a href="index.php?page=">次のページ</a></li>
-                    <li>次のページ</li>
+                    <li><a href="index.php?page=">前のコメント</a></li>
+                    <li>前のコメント</li>
+                    <li><a href="index.php?page=">次のコメント</a></li>
+                    <li>次のコメント</li>
                 </ul>
             </div>
 
