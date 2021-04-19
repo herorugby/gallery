@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ご登録ありがとうございます</title>
+    <title>登録完了</title>
 
     <link rel="stylesheet" href="../stylesheets/reset.css">
     <link rel="stylesheet" href="../stylesheets/base.css">
@@ -17,12 +17,12 @@
 <body>
     <div class="wrap">
         <header>
-            <h1>ユーザー登録が完了しました！</h1>
+            <h1>画像の登録が完了！</h1>
         </header>
 
         <main>
-            <p>下記よりログインページに移動します。</p>
-            <p><a href="../">ログインする</a></p>
+            <p>ログアウトを実行</p>
+            <p><a href="logout.php">ログアウト</a></p>
         </main>
 
         <footer id="footer" class="footer">

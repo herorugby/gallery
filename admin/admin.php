@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ご登録ありがとうございます</title>
+    <title>会員登録</title>
 
     <link rel="stylesheet" href="../stylesheets/reset.css">
     <link rel="stylesheet" href="../stylesheets/base.css">
@@ -17,12 +17,28 @@
 <body>
     <div class="wrap">
         <header>
-            <h1>ユーザー登録が完了しました！</h1>
+            <h1>管理者ページ</h1>
         </header>
 
         <main>
-            <p>下記よりログインページに移動します。</p>
-            <p><a href="../">ログインする</a></p>
+            <p>写真を登録</p>
+
+            <form action="" method="post" enctype="multipart/form-data">
+                <dl>
+                    <div>
+                        <dt>画像<span>必須</span></dt>
+                        <dd>
+                            <input type="file" name="image" id="image" value="">
+                            <p>*.jpeg/.JPEG/.jpg?.jpgのみ</p>
+                        </dd>
+                    </div>
+                </dl>
+                <div>
+                    <input type="submit" value="確認">
+                </div>
+
+            </form>
+
         </main>
 
         <footer id="footer" class="footer">
