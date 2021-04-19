@@ -1,5 +1,19 @@
 <?php
 
+
+// セッションがあるかを判定してからスタートする
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+// アカウント重複確認をするためにdbに接続する
+require_once('../dbconnect.php');
+
+// function関数のファイルを呼び出し
+require_once('../myfunc.php');
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -8,7 +22,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>会員登録</title>
+    <title>管理者</title>
 
     <link rel="stylesheet" href="../stylesheets/reset.css">
     <link rel="stylesheet" href="../stylesheets/base.css">
