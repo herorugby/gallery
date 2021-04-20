@@ -26,9 +26,9 @@
         <main>
             <div>
                 <!-- imgのパスを動的にする -->
-                <img src="images/images.JPG" alt="小野寛智の写真" width="200" height="200">
-                <img src="images/images.JPG" alt="小野寛智の写真" width="200" height="200">
-                <img src="images/images.JPG" alt="小野寛智の写真" width="200" height="200">
+                <img src="my_images/images.JPG" alt="小野寛智の写真" width="200" height="200">
+                <img src="my_images/images.JPG" alt="小野寛智の写真" width="200" height="200">
+                <img src="my_images/images.JPG" alt="小野寛智の写真" width="200" height="200">
             </div>
 
             <form action="" method="post">

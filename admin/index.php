@@ -11,9 +11,6 @@ require_once('../dbconnect.php');
 // function関数のファイルを呼び出し
 require_once('../myfunc.php');
 
-// セキュリティフォルダ
-// require_once('admin_secure.php');
-
 // 各記入蘭に空要素がないか確認するために空の変数を用意
 $email_input = '';
 $password_input = '';
@@ -67,6 +64,11 @@ if (!empty($_POST)) {
         }
     } else {
         $error['login'] = 'blank';
+    }
+
+    if (empty($error)) {
+        $_SESSION['join'] = $_POST;
+        die();
     }
 }
 

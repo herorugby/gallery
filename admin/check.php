@@ -1,5 +1,58 @@
 <?php
 
+// セッションがあるかを判定してからスタートする
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+// アカウント重複確認をするためにdbに接続する
+require_once('../dbconnect.php');
+
+// function関数のファイルを呼び出し
+require_once('../myfunc.php');
+
+// 前ページでセッションに保存されていなければ強制的にindexに戻す
+// if (!isset($_SESSION['join'])) {
+//     header('Location: index.php');
+//     die();
+// }
+
+// dbテーブル内のdatetime取得のため変数を用意
+$date = new DateTime();
+$date = $date->format('Y-m-d H:i:s');
+
+// 登録ボタンを押したらデータをdbに挿入する
+if (!empty($_POST)) {
+    try {
+        // 挿入するsql文準備
+        $sql = "INSERT INTO ";
+        $sql .= "picture ";
+        $sql .= "(picture, created) ";
+        $sql .= "VALUES ";
+        $sql .= "(?, ?) ";
+
+        // sql文の準備
+        $stmt = $dbh->prepare($sql);
+
+        $stmt->bindValue(1, $_SESSION['join']['image'], PDO::PARAM_STR);
+        $stmt->bindValue(2, $date, PDO::PARAM_STR);
+
+        // sql文の発行
+        $result = $stmt->execute();
+
+        // db挿入したらsession変数を空にする命令
+        unset($_SESSION['join']);
+
+        // db挿入ができたらthanks.phpにジャンプ
+        header('Location: thanks.php');
+        die();
+    } catch (PDOException $e) {
+        echo 'レコード挿入エラー：' . $e->getMessage();
+        die();
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -30,12 +83,16 @@
                     <div>
                         <dt>写真</dt>
                         <dd>
-
+                            <?php
+                            if ($_SESSION['join']['image'] != '') {
+                                echo '<img src="../my_gallery/' . h($_SESSION['join']['image']) . '">';
+                            }
+                            ?>
                         </dd>
                     </div>
                 </dl>
                 <div>
-                    <a href="admin.php?action=rewrite">&laquo;&nbsp;選択し直す</a> ｜ <input type="submit" value="登録する">
+                    <input type="submit" value="登録する">
                 </div>
 
             </form>
