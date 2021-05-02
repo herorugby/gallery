@@ -51,6 +51,7 @@ if (!empty($_POST)) {
                 // データが変数に代入できていれば判定を行う
                 if ($administrator) {
                     if ($administrator['email'] == $email_input && $administrator['password'] == sha1($password_input)) {
+                        // ここでデータをセッションに代入する
                         header('Location: admin.php');
                         die();
                     } else {
