@@ -1,5 +1,21 @@
 <?php
 
+// セッションがあるかを判定してからスタートする
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+// アカウント重複確認をするためにdbに接続する
+require_once('../dbconnect.php');
+
+// function関数のファイルを呼び出し
+require_once('../myfunc.php');
+
+// ログイン情報がなければログインページに返す
+if (!isset($_SESSION['email'])) {
+    header('Location: login.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">

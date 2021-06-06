@@ -5,6 +5,10 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+if (!isset($_SESSION['email'])) {
+    header('Location: index.php');
+}
+
 // アカウント重複確認をするためにdbに接続する
 require_once('../dbconnect.php');
 

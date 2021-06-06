@@ -52,11 +52,14 @@ if (!empty($_POST)) {
                 if ($administrator) {
                     if ($administrator['email'] == $email_input && $administrator['password'] == sha1($password_input)) {
                         // ここでデータをセッションに代入する
+                        $_SESSION['email'] = $administrator['email'];
+                        // admin.phpでは下のセッションは利用していない
+                        $_SESSION['password'] = $administrator['password'];
                         header('Location: admin.php');
                         die();
-                    } else {
-                        $error['login'] = 'failed';
                     }
+                } else {
+                    $error['login'] = 'failed';
                 }
             }
         } catch (PDOException $e) {

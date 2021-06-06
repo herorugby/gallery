@@ -1,4 +1,84 @@
 <?php
+
+// セッションがあるかを判定してからスタートする
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+// アカウント重複確認をするためにdbに接続する
+require_once('../dbconnect.php');
+
+// function関数のファイルを呼び出し
+require_once('../myfunc.php');
+
+// 各記入蘭に空要素がないか確認するために空の変数を用意
+$email_input = '';
+$password_input = '';
+
+// メールアドレスの記入確認
+if (isset($_POST['email'])) {
+    $email_input = h($_POST['email']);
+}
+
+// パスワードの記入確認
+if (isset($_POST['password'])) {
+    $password_input = h($_POST['password']);
+}
+
+if (!empty($_POST)) {
+
+    // パスワードなどを間違えても入力したアドレスが入力されたままにする。
+    $email_input = h($_POST['email']);
+
+    if ($email_input !== '' && $password_input !== '') {
+        try {
+            // memebersテーブルの登録内容を確認する
+            $sql = "SELECT * FROM ";
+            $sql .= "members ";
+            $sql .= "WHERE ";
+            $sql .= "email=? ";
+            $sql .= "AND ";
+            $sql .= "password=?";
+
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindValue(1, $email_input, PDO::PARAM_STR);
+            $stmt->bindValue(2, sha1($password_input), PDO::PARAM_STR);
+            $result = $stmt->execute();
+
+            // 取得したデータを変数に代入
+            if ($result) {
+                $administrator = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                // データが変数に代入できていれば判定を行う
+                if ($administrator) {
+                    if ($administrator['email'] == $email_input && $administrator['password'] == sha1($password_input)) {
+                        // ここでデータをセッションに代入する
+                        $_SESSION['email'] = $administrator['email'];
+                        // admin.phpでは下のセッションは利用していない
+                        $_SESSION['password'] = $administrator['password'];
+                        header('Location: admin.php');
+                        die();
+                    }
+                } else {
+                    $error['login'] = 'failed';
+                }
+            }
+        } catch (PDOException $e) {
+            echo 'レコード取得エラー｜' . $e->getMessage();
+            die();
+        }
+    } else {
+        $error['login'] = 'blank';
+    }
+
+    if (empty($error)) {
+        $_SESSION['join'] = $_POST;
+        die();
+    }
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
